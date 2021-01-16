@@ -1,19 +1,3 @@
-# PyExifTool <http://github.com/smarnach/pyexiftool>
-# Copyright 2012 Sven Marnach
-
-# This file is part of PyExifTool.
-#
-# PyExifTool is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the licence, or
-# (at your option) any later version, or the BSD licence.
-#
-# PyExifTool is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-#
-# See COPYING.GPL or COPYING.BSD for more details.
-
 from distutils.core import setup
 
 setup(name="PyExifTool",
