@@ -9,12 +9,13 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",
+<<<<<<< HEAD:eric-client/package.json
     "date-fns": "^2.16.1",
     "leaflet": "^1.7.1",
+=======
+>>>>>>> parent of fbd0755... Added Map:client/package.json
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-icons": "^4.1.0",
-    "react-leaflet": "^3.0.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "styled-components": "^5.2.1",
