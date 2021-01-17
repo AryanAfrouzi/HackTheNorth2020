@@ -1,16 +1,9 @@
 import React from "react";
 import Card from "../components/Card";
 import { Grid } from "@material-ui/core";
-import "date-fns";
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
 
 export default class Sightings extends React.Component {
   state = {
-    date: Date.now(),
     geese: [],
   };
 
@@ -19,29 +12,6 @@ export default class Sightings extends React.Component {
       geese: this.props.geese,
     });
   }
-
-  changeDate = (date) => {
-    this.setState({ date });
-    const filteredGeese = this.props.geese.filter(
-      (goose) => goose.date === this.getDate(date)
-    );
-    this.setState({ geese: filteredGeese });
-    console.log(this.props.geese, this.getDate(this.state.date));
-  };
-
-  getDate = (date) => {
-    date = new Date(date);
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const year = date.getFullYear();
-    return (
-      (month < 10 ? "0" + month : month) +
-      "/" +
-      (day < 10 ? "0" + day : day) +
-      "/" +
-      year
-    );
-  };
 
   render() {
     return (

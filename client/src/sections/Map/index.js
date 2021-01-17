@@ -23,6 +23,14 @@ class Map extends React.Component {
     center: [43.4723, -80.5449],
   };
 
+  componentDidMount() {
+    if (this.props.center) {
+      this.setState({
+        center: this.props.center,
+      });
+    }
+  }
+
   render() {
     return (
       <MapContainer
@@ -49,10 +57,9 @@ class Map extends React.Component {
                 key={goose.date}
                 eventHandlers={{
                   click: (e) => {
-                    console.log("Gottem");
                     this.setState({ center: [goose.lat, goose.lng] });
-                    this.props.toggleDrawer(true);
-                    this.props.changeCurrentGoose(goose);
+                    //this.props.toggleDrawer(true);
+                    //this.props.changeCurrentGoose(goose);
                   },
                 }}
               />
