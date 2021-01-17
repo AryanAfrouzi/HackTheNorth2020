@@ -7,6 +7,7 @@
 
 .leaflet-container {
   width: 100%; 
+<<<<<<< HEAD:eric-client/src/App.css
   height: 98vh;
 }
 
@@ -51,3 +52,7 @@ body {
   }
 }
 >>>>>>> parent of fbd0755... Added Map
+=======
+  height: 100vh;
+}
+>>>>>>> parent of 88b4d04... Finished up map and gallery:map/src/App.css
