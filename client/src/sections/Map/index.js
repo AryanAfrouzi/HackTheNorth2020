@@ -11,6 +11,9 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import gooseImg from "../../assets/goose.png";
 import styled from "styled-components";
+import { withRouter } from "react-router";
+import Popup from "../../components/Popup";
+import { Dialog } from "@material-ui/core";
 
 function ChangeView({ center }) {
   const map = useMap();
@@ -19,56 +22,82 @@ function ChangeView({ center }) {
 }
 
 class Map extends React.Component {
-  state = {
-    center: [43.4723, -80.5449],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      center: [43.4723, -80.5449],
+      open: false,
+      currentGoose: null,
+    };
+    this.handleClose = this.handleClose.bind(this);
+  }
 
   componentDidMount() {
-    if (this.props.center) {
+    if (this.props.location.state) {
       this.setState({
-        center: this.props.center,
+        center: this.props.location.state.center,
+        open: false,
+      });
+    } else {
+      this.setState({
+        center: [43.4723, -80.5449],
       });
     }
   }
 
-  render() {
-    return (
-      <MapContainer
-        useFlyTo
-        attributionControl={false}
-        center={this.state.center}
-        zoom={16}
-        zoomControl={false}
-      >
-        <ChangeView center={this.state.center} />
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        {this.props.geese &&
-          this.props.geese.map((goose) => {
-            const geeseIcon = new L.Icon({
-              iconUrl: gooseImg,
-              iconRetinaUrl: gooseImg,
-              iconSize: [50, 50],
-            });
+  handleClose() {
+    this.setState({
+      open: false,
+    });
+  }
 
-            return (
-              <Marker
-                position={[goose.lat, goose.lng]}
-                icon={geeseIcon}
-                key={goose.date}
-                eventHandlers={{
-                  click: (e) => {
-                    this.setState({ center: [goose.lat, goose.lng] });
-                    //this.props.toggleDrawer(true);
-                    //this.props.changeCurrentGoose(goose);
-                  },
-                }}
-              />
-            );
-          })}
-        <ZoomControl position="topright" />
-      </MapContainer>
+  render() {
+    const { state } = this.props;
+
+    return (
+      <>
+        <MapContainer
+          useFlyTo
+          attributionControl={false}
+          center={this.state.center}
+          zoom={16}
+          zoomControl={false}
+        >
+          <ChangeView center={this.state.center} />
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          {this.props.geese &&
+            this.props.geese.map((goose) => {
+              const geeseIcon = new L.Icon({
+                iconUrl: gooseImg,
+                iconRetinaUrl: gooseImg,
+                iconSize: [50, 50],
+              });
+
+              return (
+                <Marker
+                  position={[goose.lat, goose.lng]}
+                  icon={geeseIcon}
+                  key={goose.date}
+                  eventHandlers={{
+                    click: (e) => {
+                      this.setState({
+                        center: [goose.lat, goose.lng],
+                        currentGoose: goose,
+                        open: true,
+                      });
+                    },
+                  }}
+                />
+              );
+            })}
+          <ZoomControl position="topright" />
+        </MapContainer>
+        <Dialog open={this.state.open} onClose={this.handleClose}>
+          <Popup goose={this.state.currentGoose} />
+        </Dialog>
+      </>
     );
   }
 }
 
-export default Map;
+export default withRouter(Map);

@@ -126,6 +126,7 @@ const App = () => {
                   <Route exact path="/">
                     <Map geese={Geese.data} />
                   </Route>
+
                   <Route exact path="/drone">
                     <Layout>
                       <Drone />
