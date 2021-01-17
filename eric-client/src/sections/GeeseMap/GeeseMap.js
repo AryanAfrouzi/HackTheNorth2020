@@ -1,19 +1,25 @@
 import React from "react";
-import { MapContainer, TileLayer, Marker, ZoomControl } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, ZoomControl, useMap } from 'react-leaflet';
 import "./GeeseMap.css";
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import gooseImg from "./images/goose.png";
 
+function ChangeView({ center }) {
+    const map = useMap();
+    map.setView(center);
+    return null;
+}
+
 class GeeseMap extends React.Component {
-    handleClick = event => {
-        const { lat, lng } = event.latlng;
-        console.log(`Clicked at ${lat}, ${lng}`);
+    state = {
+        center: [43.4723, -80.5449]
     }
     
     render() {
         return (
-            <MapContainer useFlyTo attributionControl={false} center={[43.4723, -80.5449]} zoom={16} zoomControl={false}>
+            <MapContainer useFlyTo attributionControl={false} center={this.state.center} zoom={16} zoomControl={false}>
+                <ChangeView center={this.state.center}/> 
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
                     {this.props.geese && this.props.geese.map(goose => {
                         const geeseIcon = new L.Icon({
@@ -24,10 +30,13 @@ class GeeseMap extends React.Component {
 
                         return <Marker position={[goose.lat, goose.lng]} icon={geeseIcon} key={goose.date} eventHandlers={{click: (e) => {
                                     console.log("Gottem");
+                                    this.setState({center: [goose.lat, goose.lng]});
+                                    this.props.toggleDrawer(true);
+                                    this.props.changeCurrentGoose(goose);
                                 }
                             }}/>
                     })}
-                <ZoomControl position="bottomright"/>
+                <ZoomControl position="topright"/>
             </MapContainer>
         );
     }
