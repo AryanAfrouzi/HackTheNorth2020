@@ -9,7 +9,9 @@ import {
 import "./GeeseMap.css";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import gooseImg from "../../assets/goose.png";
+import Yellow from "../../assets/Goose/YellowGoose.png";
+import Orange from "../../assets/Goose/OrangeGoose.png";
+import Red from "../../assets/Goose/RedGoose.png";
 import styled from "styled-components";
 import { withRouter } from "react-router";
 import Popup from "../../components/Popup";
@@ -36,11 +38,11 @@ class Map extends React.Component {
     if (this.props.location.state) {
       this.setState({
         center: this.props.location.state.center,
-        open: false,
       });
     } else {
       this.setState({
         center: [43.4723, -80.5449],
+        open: true,
       });
     }
   }
@@ -67,9 +69,16 @@ class Map extends React.Component {
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {this.props.geese &&
             this.props.geese.map((goose) => {
+              let color = Yellow;
+
+              if (goose.number >= 10) {
+                color = Red;
+              } else if (goose.number >= 5) {
+                color = Orange;
+              }
               const geeseIcon = new L.Icon({
-                iconUrl: gooseImg,
-                iconRetinaUrl: gooseImg,
+                iconUrl: color,
+                iconRetinaUrl: color,
                 iconSize: [50, 50],
               });
 

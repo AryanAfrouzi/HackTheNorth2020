@@ -58,8 +58,6 @@ class Map extends React.Component {
                 eventHandlers={{
                   click: (e) => {
                     this.setState({ center: [goose.lat, goose.lng] });
-                    //this.props.toggleDrawer(true);
-                    //this.props.changeCurrentGoose(goose);
                   },
                 }}
               />

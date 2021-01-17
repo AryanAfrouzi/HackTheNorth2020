@@ -8,16 +8,18 @@ import {
   Button,
 } from "@material-ui/core";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Popup = ({ goose }) => {
   return (
     <Card>
       <Image image={goose.image} title="Paella dish" />
       <CardContent>
-        <Typography>Date {goose.date}</Typography>
         <Typography>Number of Geese: {goose.number}</Typography>
-        <Typography>Latitude: {goose.lat}</Typography>
-        <Typography>Longitude: {goose.lng}</Typography>
+        <Typography>Date: {goose.date}</Typography>
+        <Button component={Link} to="/sightings">
+          More Info
+        </Button>
       </CardContent>
     </Card>
   );

@@ -19,6 +19,7 @@ import Sightings from "./sections/Sightings";
 import "./App.css";
 
 import Geese from "./data/Geese";
+import DroneImages from "./data/DroneImages";
 
 /*
 class App extends React.Component {
@@ -126,10 +127,9 @@ const App = () => {
                   <Route exact path="/">
                     <Map geese={Geese.data} />
                   </Route>
-
                   <Route exact path="/drone">
                     <Layout>
-                      <Drone />
+                      <Drone images={DroneImages.data} />
                     </Layout>
                   </Route>
                   <Route exact path="/sightings">
