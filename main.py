@@ -4,7 +4,7 @@ import time
 server = Flask(__name__)
 from sightings import Sightings
 import uuid
-from io import BytesIO
+import json
 
 sightings = Sightings()
 
@@ -19,7 +19,9 @@ def load_still():
     sid = str(uuid.uuid1().int)
     img.save("stills/"+sid+".png")
     num_geese, bbox = inference(img)
-    sightings.add(sid, time.time(), request.json["location"], request.json["telemetry"], num_geese, bbox)
+    jsondata = json.loads(request.form['json'])
+    sightings.add(sid, time.time(), jsondata["location"], jsondata["telemetry"], num_geese, bbox)
+    return "Success", 200
 
 @server.route("/sightings", methods = ["GET"])
 def get_sightings():

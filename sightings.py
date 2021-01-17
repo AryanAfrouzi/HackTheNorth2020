@@ -10,7 +10,7 @@ class Sightings:
         self.data.append({
             "id"            :   still_id,
             "time"          :   time,
-            "gps"           :   gps,
+            "location"      :   gps,
             "telemetry"     :   telemetry,
             "geesestimate"  :   num_geese,
             "bbox"          :   bbox
