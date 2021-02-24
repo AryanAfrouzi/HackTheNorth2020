@@ -10,10 +10,10 @@ import {
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-const Popup = ({ goose }) => {
+const Popup = ({ goose, server }) => {
   return (
     <Card>
-      <Image image={goose.image} title="Paella dish" />
+      <Image image={server + "/get-still?id=" + goose.image} />
       <CardContent>
         <Typography>Number of Geese: {goose.number}</Typography>
         <Typography>Date: {goose.date}</Typography>

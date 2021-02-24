@@ -42,7 +42,6 @@ class Map extends React.Component {
     } else {
       this.setState({
         center: [43.4723, -80.5449],
-        open: true,
       });
     }
   }
@@ -102,7 +101,7 @@ class Map extends React.Component {
           <ZoomControl position="topright" />
         </MapContainer>
         <Dialog open={this.state.open} onClose={this.handleClose}>
-          <Popup goose={this.state.currentGoose} />
+          <Popup server={this.props.server} goose={this.state.currentGoose} />
         </Dialog>
       </>
     );

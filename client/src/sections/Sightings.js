@@ -27,7 +27,9 @@ export default class Sightings extends React.Component {
         {this.state.geese.map((goose) => (
           <Grid item xs={12} md={4} sm={6}>
             <Card>
-              <Image image={goose.image} />
+              <Image
+                image={this.props.server + "/get-still-boxed?id=" + goose.image}
+              />
               <CardContent>
                 <Typography>Date: {goose.date}</Typography>
                 <Typography>Number of Geese: {goose.number}</Typography>
